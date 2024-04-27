@@ -5,13 +5,15 @@ const articles = getArticles();
 </script>
 
 <template>
-    <div>
-        <div v-for="article in articles" :key="article.id">
-            <div>{{ article.id }}</div>
-            <div>{{ article.title }}</div>
-            <div>{{ article.date }}</div>
-            <div>{{ article.path }}</div>
-        </div>
+    <div class="flex justify-center items-center">
+        <ul class="w-3/4">
+            <li class="my-8" v-for="article in articles" :key="article.id">
+                <a class="flex-row" href="{{article.path}}">
+                    <span class="font-bold text-6xl mx-4">{{ article.title }}</span>
+                    <span>发表日期: {{ article.date }}</span>
+                </a>
+            </li>
+        </ul>
     </div>
 </template>
 
