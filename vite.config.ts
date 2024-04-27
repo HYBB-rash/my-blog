@@ -13,6 +13,12 @@ export default defineConfig({
                 main: resolve(__dirname, "index.html"),
                 test: resolve(__dirname, "views/test/index.html"),
             },
+            output: {
+                manualChunks: {
+                    vue: ["vue"],
+                    dayjs: ["dayjs"],
+                },
+            },
         },
     },
 });
