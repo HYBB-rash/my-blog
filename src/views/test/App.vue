@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <h1>Test This Pages.</h1>
+  <h1 class="text-3xl font-bold underline">Test This Pages.</h1>
 </template>
 
 <style scoped>
