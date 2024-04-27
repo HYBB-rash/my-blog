@@ -8,7 +8,7 @@ const articles = getArticles();
     <div class="flex justify-center items-center">
         <ul class="w-3/4">
             <li class="my-8" v-for="article in articles" :key="article.id">
-                <a class="flex-row" href="{{article.path}}">
+                <a class="flex-row" href="{{ article.path }}">
                     <span class="font-bold text-6xl mx-4">{{ article.title }}</span>
                     <span>发表日期: {{ article.date }}</span>
                 </a>
