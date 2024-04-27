@@ -6,6 +6,8 @@ type Article = {
     title: string;
     timestamp: number;
     path: string;
+    md5: string;
+    md5_suffix: string;
 };
 
 export function getArticles() {

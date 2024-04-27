@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "build": "npx tsx script/build_markdown.ts && vue-tsc && vite build",
+    "preview": "vite preview",
+    "build-markdown": "npx tsx script/build_markdown.ts"
   },
   "dependencies": {
     "dayjs": "^1.11.10",
@@ -22,6 +23,7 @@
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
     "tailwindcss": "^3.4.3",
+    "ts-node": "^10.9.2",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vue-tsc": "^2.0.6"
