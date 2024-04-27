@@ -12,6 +12,7 @@ export default defineConfig({
             input: {
                 main: resolve(__dirname, "index.html"),
                 test: resolve(__dirname, "views/test/index.html"),
+                pages: resolve(__dirname, "views/pages/index.html"),
             },
             output: {
                 manualChunks: {
