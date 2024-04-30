@@ -12,7 +12,7 @@ export function generateMD5(input: string) {
 
 const md = markdownit();
 
-function tmpl_html(suffix: string, content: string) {
+function tmpl_html(suffix: string) {
     const pages_dir = `pages/${suffix}`;
     return `
 <!doctype html>
@@ -23,7 +23,7 @@ function tmpl_html(suffix: string, content: string) {
     <title>文章...</title>
 </head>
 <body>
-<div id="app"><div style="display: none;">${content}</div></div>
+<div id="app"></div>
 <script type="module" src="/views/${pages_dir}/main.ts"></script>
 </body>
 </html>
@@ -46,11 +46,10 @@ getFileList("./public/files/articles", /\.md$/).forEach((file: string) => {
     console.log(`Processing ${file}`);
 
     const file_content = fs.readFileSync(file, "utf-8");
-    const content = md.render(file_content);
     const suffix = generateMD5(file_content).slice(0, 8);
 
     fs.mkdirSync(`./views/pages/${suffix}`, { recursive: true });
-    fs.writeFileSync(`./views/pages/${suffix}/index.html`, tmpl_html(suffix, content));
+    fs.writeFileSync(`./views/pages/${suffix}/index.html`, tmpl_html(suffix));
     fs.writeFileSync(`./views/pages/${suffix}/main.ts`, tmpl_ts());
 });
 
