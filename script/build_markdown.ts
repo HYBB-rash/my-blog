@@ -1,16 +1,17 @@
 import * as fs from "node:fs";
-import markdownit from "markdown-it";
+import { fileURLToPath } from "url";
 import { getFileList } from "./shared";
-
+import { dirname, resolve } from "path";
 import crypto from "node:crypto";
 
-export function generateMD5(input: string) {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+function generateMD5(input: string) {
     const hash = crypto.createHash("md5");
     hash.update(input);
     return hash.digest("hex");
 }
-
-const md = markdownit();
 
 function tmpl_html(suffix: string) {
     const pages_dir = `pages/${suffix}`;
@@ -40,17 +41,17 @@ createApp(App).mount("#app");
 `;
 }
 
-fs.rmSync("./views/pages", { recursive: true });
+fs.rmSync(resolve(__dirname, "../views/pages"), { recursive: true });
 
-getFileList("./public/files/articles", /\.md$/).forEach((file: string) => {
+getFileList(resolve(__dirname, "../public/files/articles"), /\.md$/).forEach((file: string) => {
     console.log(`Processing ${file}`);
 
     const file_content = fs.readFileSync(file, "utf-8");
     const suffix = generateMD5(file_content).slice(0, 8);
 
-    fs.mkdirSync(`./views/pages/${suffix}`, { recursive: true });
-    fs.writeFileSync(`./views/pages/${suffix}/index.html`, tmpl_html(suffix));
-    fs.writeFileSync(`./views/pages/${suffix}/main.ts`, tmpl_ts());
+    fs.mkdirSync(resolve(__dirname, `../views/pages/${suffix}`), { recursive: true });
+    fs.writeFileSync(resolve(__dirname, `../views/pages/${suffix}/index.html`), tmpl_html(suffix));
+    fs.writeFileSync(resolve(__dirname, `../views/pages/${suffix}/main.ts`), tmpl_ts());
 });
 
 type Article = {
@@ -60,20 +61,20 @@ type Article = {
     path: string;
 };
 
-const content = fs.readFileSync("./public/articles.json", "utf-8");
+const content = fs.readFileSync(resolve(__dirname, "../public/articles.json"), "utf-8");
 
 const articles: Article[] = JSON.parse(content);
 
 const articles_with_md5 = articles.map((article) => {
     const { path } = article;
-    const actual_path = `./public/${path}`;
+    const actual_path = resolve(__dirname, "../public", path);
     const file_content = fs.readFileSync(actual_path, "utf-8");
     const md5 = generateMD5(file_content);
     const md5_suffix = md5.slice(0, 8);
 
-    console.log(`Processing compute md5: ${actual_path} => ${md5_suffix}`);
+    console.log(`Compute md5: ${actual_path} => ${md5_suffix}`);
 
     return { ...article, md5, md5_suffix };
 });
 
-fs.writeFileSync("./public/articles.json", JSON.stringify(articles_with_md5, null, 4));
+fs.writeFileSync(resolve(__dirname, "../public/articles.json"), JSON.stringify(articles_with_md5, null, 4));
