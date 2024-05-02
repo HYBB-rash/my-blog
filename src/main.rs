@@ -14,7 +14,9 @@ fn App() -> Html {
     html! {
         <div>
             <button {onclick}>{ "+1" }</button>
+            <div class="text-3xl font-bold underline">{ "测试测试测试" }</div>
             <p>{ *counter }</p>
+            <div>{ *counter }</div>
         </div>
     }
 }
