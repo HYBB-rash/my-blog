@@ -1,9 +1,5 @@
-use actix_web::{get, web, App, HttpServer, Responder};
-
-#[get("/hello/{name}")]
-async fn greet(name: web::Path<String>) -> impl Responder {
-    format!("Hello {name}!")
-}
+use actix_web::{App, HttpServer};
+use yew_app::controller::index::greet;
 
 #[actix_web::main] // or #[tokio::main]
 async fn main() -> std::io::Result<()> {

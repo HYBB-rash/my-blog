@@ -1,24 +1,9 @@
 pub mod index {
 
-    pub fn action_index() -> &'static str {
-        super::demo::add_to_waitlist()
-    }
-}
-
-pub mod site {}
-
-pub mod demo {
-    pub fn add_to_waitlist() -> &'static str {
-        super::dao::demo::create_wait()
-    }
-}
-
-pub mod demo2 {}
-
-mod dao {
-    pub mod demo {
-        pub fn create_wait() -> &'static str {
-            "create_wait"
-        }
+    use crate::views::hello::get_hello;
+    use actix_web::{get, web, Responder};
+    #[get("/index/{name}")]
+    async fn greet(name: web::Path<String>) -> impl Responder {
+        get_hello(&name)
     }
 }
