@@ -2,7 +2,7 @@
 module.exports = {
   mode: "jit",
   content: {
-    files: ["src/**/*.rs", "index.html"],
+    files: ["src/views/**/*.{html,vue,ts,tsx,js,jsx,css}"],
   },
   darkMode: "media", // 'media' or 'class'
   theme: {
