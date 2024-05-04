@@ -1,5 +1,5 @@
 import { createApp, defineComponent } from 'vue'
-import './style.css'
+import "./src/css/style.css"
 
 createApp(defineComponent({
     setup() {

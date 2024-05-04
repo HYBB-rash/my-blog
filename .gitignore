@@ -1,3 +1,6 @@
 /target
 /node_modules
 /dist
+/.vscode
+/.idea
+/src/views/templates/dist

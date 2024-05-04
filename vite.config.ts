@@ -4,6 +4,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/dist",
   plugins: [vue(), vueJsx()],
   // root: "src/views/templates/hello.html",
   server: {
@@ -13,8 +14,10 @@ export default defineConfig({
     manifest: true,
     rollupOptions: {
       input: {
-        index: "index.html",
+        index: "src/views/templates/index.view.ts",
       },
-    }
-  }
+    },
+    outDir: "target/release/dist",
+  },
+  publicDir: "src/views/templates/public",
 });
