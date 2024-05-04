@@ -1,8 +1,5 @@
-import { createApp, defineComponent } from 'vue'
-import "./src/css/style.css"
+import { createApp } from "vue";
+import App from "./main.view.tsx";
+import "./src/css/style.css";
 
-createApp(defineComponent({
-    setup() {
-        return () => "Hello World!";
-    }
-})).mount('#app')
+createApp(App).mount("#app");
